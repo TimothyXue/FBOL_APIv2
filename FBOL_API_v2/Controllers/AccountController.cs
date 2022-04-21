@@ -1,4 +1,5 @@
 ﻿using FBOL.Mobile.Entityframework.DTO;
+
 using FBOL_API_v2.Managers;
 using FBOL_API_v2.Model;
 using Microsoft.AspNetCore.Authorization;
@@ -82,7 +83,7 @@ namespace FBOL_API_v2.Controllers
 
             var claims = new[]
             {
-                new Claim(ClaimTypes.NameIdentifier, user.UserName),
+                new Claim(ClaimTypes.NameIdentifier, user.UserId.ToString()),
        
             };
 
@@ -101,7 +102,7 @@ namespace FBOL_API_v2.Controllers
         {
             var currentUser = GetCurrentUser();
 
-            return Ok($"Hi {currentUser.UserName}, you are logged in");
+            return Ok($"Hi {currentUser.UserId}, you are logged in");
         }
 
         private User GetCurrentUser()
@@ -114,7 +115,7 @@ namespace FBOL_API_v2.Controllers
 
                 return new User
                 {
-                    UserName = userClaims.FirstOrDefault(o => o.Type == ClaimTypes.NameIdentifier)?.Value
+                    UserId =  int.TryParse(userClaims.FirstOrDefault(o => o.Type == ClaimTypes.NameIdentifier)?.Value, out var id) ? id : 0
                 };
             }
             return null;

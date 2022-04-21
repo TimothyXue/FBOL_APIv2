@@ -6,13 +6,13 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace FBOL.EntityFramework.Model
 {
-    public partial class FBOLDbContext : DbContext
+    public partial class FBOLContext : DbContext
     {
-        public FBOLDbContext()
+        public FBOLContext()
         {
         }
 
-        public FBOLDbContext(DbContextOptions<FBOLDbContext> options)
+        public FBOLContext(DbContextOptions<FBOLContext> options)
             : base(options)
         {
         }
@@ -43,7 +43,6 @@ namespace FBOL.EntityFramework.Model
         public virtual DbSet<AssessmentTask> AssessmentTasks { get; set; }
         public virtual DbSet<Attendance> Attendances { get; set; }
         public virtual DbSet<AttendanceReason> AttendanceReasons { get; set; }
-        public virtual DbSet<AudioFile> AudioFiles { get; set; }
         public virtual DbSet<Auspost> Ausposts { get; set; }
         public virtual DbSet<AvetmissNat00060> AvetmissNat00060s { get; set; }
         public virtual DbSet<AvetmissNat00060Temp> AvetmissNat00060Temps { get; set; }
@@ -155,6 +154,7 @@ namespace FBOL.EntityFramework.Model
         public virtual DbSet<LearningseatResult> LearningseatResults { get; set; }
         public virtual DbSet<Lesson> Lessons { get; set; }
         public virtual DbSet<LessonEmail> LessonEmails { get; set; }
+        public virtual DbSet<LessonGroup> LessonGroups { get; set; }
         public virtual DbSet<LessonQuestion> LessonQuestions { get; set; }
         public virtual DbSet<Licensee> Licensees { get; set; }
         public virtual DbSet<LicenseeAccess> LicenseeAccesses { get; set; }
@@ -169,8 +169,6 @@ namespace FBOL.EntityFramework.Model
         public virtual DbSet<MasterDreamList> MasterDreamLists { get; set; }
         public virtual DbSet<McrPcr> McrPcrs { get; set; }
         public virtual DbSet<McrPcrResult> McrPcrResults { get; set; }
-        public virtual DbSet<MobileSession> MobileSessions { get; set; }
-        public virtual DbSet<MobileUser> MobileUsers { get; set; }
         public virtual DbSet<Nat120Log> Nat120Logs { get; set; }
         public virtual DbSet<Nat120vic> Nat120vics { get; set; }
         public virtual DbSet<Nat120vicLma> Nat120vicLmas { get; set; }
@@ -1311,29 +1309,6 @@ namespace FBOL.EntityFramework.Model
                 entity.Property(e => e.ReasonTitle)
                     .HasMaxLength(40)
                     .HasColumnName("reason_title");
-            });
-
-            modelBuilder.Entity<AudioFile>(entity =>
-            {
-                entity.HasNoKey();
-
-                entity.ToTable("AudioFile");
-
-                entity.Property(e => e.CourseCode)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
-                entity.Property(e => e.Description).HasMaxLength(255);
-
-                entity.Property(e => e.FileName)
-                    .IsRequired()
-                    .HasMaxLength(255);
-
-                entity.Property(e => e.Id).ValueGeneratedOnAdd();
-
-                entity.Property(e => e.ModuleName)
-                    .IsRequired()
-                    .HasMaxLength(50);
             });
 
             modelBuilder.Entity<Auspost>(entity =>
@@ -7121,6 +7096,27 @@ namespace FBOL.EntityFramework.Model
                     .HasDefaultValueSql("((1))");
             });
 
+            modelBuilder.Entity<LessonGroup>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToTable("lesson_group");
+
+                entity.Property(e => e.CourseId).HasColumnName("course_id");
+
+                entity.Property(e => e.GroupId).HasColumnName("group_id");
+
+                entity.Property(e => e.GroupSeq).HasColumnName("group_seq");
+
+                entity.Property(e => e.LessonGroupId)
+                    .ValueGeneratedOnAdd()
+                    .HasColumnName("lesson_group_id");
+
+                entity.Property(e => e.LessonId).HasColumnName("lesson_id");
+
+                entity.Property(e => e.LessonSeq).HasColumnName("lesson_seq");
+            });
+
             modelBuilder.Entity<LessonQuestion>(entity =>
             {
                 entity.ToTable("lesson_questions");
@@ -7984,48 +7980,6 @@ namespace FBOL.EntityFramework.Model
                     .HasMaxLength(2000)
                     .IsUnicode(false)
                     .HasColumnName("r9");
-            });
-
-            modelBuilder.Entity<MobileSession>(entity =>
-            {
-                entity.HasNoKey();
-
-                entity.ToTable("MobileSession");
-
-                entity.Property(e => e.Id).ValueGeneratedOnAdd();
-            });
-
-            modelBuilder.Entity<MobileUser>(entity =>
-            {
-                entity.HasNoKey();
-
-                entity.ToTable("Mobile_User");
-
-                entity.Property(e => e.ConfirmationCode).HasMaxLength(32);
-
-                entity.Property(e => e.EmailAddress).HasMaxLength(1024);
-
-                entity.Property(e => e.FirstName).HasMaxLength(128);
-
-                entity.Property(e => e.Id).ValueGeneratedOnAdd();
-
-                entity.Property(e => e.LastName).HasMaxLength(128);
-
-                entity.Property(e => e.PasswordHash)
-                    .IsRequired()
-                    .HasMaxLength(1024);
-
-                entity.Property(e => e.PasswordSalt)
-                    .IsRequired()
-                    .HasMaxLength(256);
-
-                entity.Property(e => e.PreferredFirstName).HasMaxLength(200);
-
-                entity.Property(e => e.PreferredLastName).HasMaxLength(200);
-
-                entity.Property(e => e.UserName)
-                    .IsRequired()
-                    .HasMaxLength(1024);
             });
 
             modelBuilder.Entity<Nat120Log>(entity =>
