@@ -1,0 +1,26 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "546085a6-3f8a-460b-afb0-3d223e83806b": {
+      "ProjectGuid": "546085a6-3f8a-460b-afb0-3d223e83806b",
+      "DisplayName": "SpLib",
+      "ColorIndex": 0
+    },
+    "777eb856-cd12-49c5-87f4-2ede23082d03": {
+      "ProjectGuid": "777eb856-cd12-49c5-87f4-2ede23082d03",
+      "DisplayName": "FBOL_API_v2",
+      "ColorIndex": 1
+    },
+    "d29fd4ea-d530-4832-8db9-c0fe093eecca": {
+      "ProjectGuid": "d29fd4ea-d530-4832-8db9-c0fe093eecca",
+      "DisplayName": "FBOL.EntityFramework",
+      "ColorIndex": 2
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "Miscellaneous Files",
+      "ColorIndex": -1
+    }
+  },
+  "NextColorIndex": 3
+}

@@ -1,0 +1,15 @@
+C:\DevOps\FBOL_APIv2\FBOL.EntityFramework\bin\Debug\net5.0\FBOL.EntityFramework.deps.json
+C:\DevOps\FBOL_APIv2\FBOL.EntityFramework\bin\Debug\net5.0\FBOL.EntityFramework.dll
+C:\DevOps\FBOL_APIv2\FBOL.EntityFramework\bin\Debug\net5.0\ref\FBOL.EntityFramework.dll
+C:\DevOps\FBOL_APIv2\FBOL.EntityFramework\bin\Debug\net5.0\FBOL.EntityFramework.pdb
+C:\DevOps\FBOL_APIv2\FBOL.EntityFramework\obj\Debug\net5.0\FBOL.EntityFramework.csproj.AssemblyReference.cache
+C:\DevOps\FBOL_APIv2\FBOL.EntityFramework\obj\Debug\net5.0\FBOL.EntityFramework.GeneratedMSBuildEditorConfig.editorconfig
+C:\DevOps\FBOL_APIv2\FBOL.EntityFramework\obj\Debug\net5.0\FBOL.EntityFramework.AssemblyInfoInputs.cache
+C:\DevOps\FBOL_APIv2\FBOL.EntityFramework\obj\Debug\net5.0\FBOL.EntityFramework.AssemblyInfo.cs
+C:\DevOps\FBOL_APIv2\FBOL.EntityFramework\obj\Debug\net5.0\FBOL.EntityFramework.csproj.CoreCompileInputs.cache
+C:\DevOps\FBOL_APIv2\FBOL.EntityFramework\obj\Debug\net5.0\FBOL.EntityFramework.dll
+C:\DevOps\FBOL_APIv2\FBOL.EntityFramework\obj\Debug\net5.0\ref\FBOL.EntityFramework.dll
+C:\DevOps\FBOL_APIv2\FBOL.EntityFramework\obj\Debug\net5.0\FBOL.EntityFramework.pdb
+C:\DevOps\FBOL_APIv2\FBOL.EntityFramework\bin\Debug\net5.0\FBOL.EntityFramework.runtimeconfig.json
+C:\DevOps\FBOL_APIv2\FBOL.EntityFramework\bin\Debug\net5.0\FBOL.EntityFramework.runtimeconfig.dev.json
+C:\DevOps\FBOL_APIv2\FBOL.EntityFramework\obj\Debug\net5.0\FBOL.EntityFramework.genruntimeconfig.cache
