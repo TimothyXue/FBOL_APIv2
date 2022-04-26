@@ -42,7 +42,7 @@ namespace FBOL_API_v2.Controllers
 
         private User Authenticate(UserLogin userLogin)
         {
-            AccountManager _am = new AccountManager();
+            AccountManager _am = new AccountManager(_config);
 
             if (_am.ValidateUser(userLogin.UserName.Trim(), userLogin.Password))
             {
@@ -63,19 +63,6 @@ namespace FBOL_API_v2.Controllers
                 return null;
             }
         }
-
-       /* private User Authenticate(UserLogin userLogin)
-        {
-            var currentUser = MockDb.users.FirstOrDefault(o => o.UserName.ToLower() == userLogin.userId.ToLower() && o.Password == userLogin.password);
-
-            if (currentUser != null)
-            {
-                return currentUser;
-            }
-
-            return null;
-        }
-*/
         private string Generate(User user)
         {
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
@@ -90,7 +77,7 @@ namespace FBOL_API_v2.Controllers
             var token = new JwtSecurityToken(_config["Jwt:Issuer"],
               _config["Jwt:Audience"],
               claims,
-              expires: DateTime.Now.AddMinutes(15),
+              expires: DateTime.Now.AddMinutes(20),
               signingCredentials: credentials);
 
             return new JwtSecurityTokenHandler().WriteToken(token);

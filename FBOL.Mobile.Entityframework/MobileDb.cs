@@ -1,4 +1,5 @@
 ﻿using FBOL.Mobile.Entityframework.Model;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +10,16 @@ namespace FBOL.Mobile.Entityframework
 {
     public  class MobileDb
     {
-        public static DTO.User GetUserByUserName(string userName)
+        private readonly IConfiguration _config;
+
+        public MobileDb(IConfiguration config)
         {
-            using (FBOLMobileContext ctx = new FBOLMobileContext())
+            _config = config;
+        }
+
+        public  DTO.User GetUserByUserName(string userName)
+        {
+            using (FBOLMobileContext ctx = new FBOLMobileContext(_config))
             {
 
                 Model.User usr = ctx.Users.Where(x => (x.UserName.ToLower() == userName.Trim().ToLower())).FirstOrDefault();
@@ -21,17 +29,17 @@ namespace FBOL.Mobile.Entityframework
             }
         }
 
-        public static DTO.User GetUser(int id)
+        public  DTO.User GetUser(int id)
         {
-            using (FBOLMobileContext ctx = new FBOLMobileContext())
+            using (FBOLMobileContext ctx = new FBOLMobileContext(_config))
             {
                 return DtoConvertor.ConvertToDto(ctx.Users.Where(x => x.Id == id).FirstOrDefault());
             }
         }
 
-        public static List<DTO.User> GetUsers()
+        public  List<DTO.User> GetUsers()
         {
-            using (FBOLMobileContext ctx = new FBOLMobileContext())
+            using (FBOLMobileContext ctx = new FBOLMobileContext(_config))
             {
                 return ctx.Users.ToList().ConvertAll(DtoConvertor.ConvertToDto);
             }

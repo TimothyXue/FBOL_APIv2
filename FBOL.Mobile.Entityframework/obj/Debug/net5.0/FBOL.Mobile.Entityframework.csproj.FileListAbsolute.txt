@@ -1,8 +1,9 @@
 C:\DevOps\FBOL_APIv2\FBOL.Mobile.Entityframework\bin\Debug\net5.0\FBOL.Mobile.Entityframework.deps.json
+C:\DevOps\FBOL_APIv2\FBOL.Mobile.Entityframework\bin\Debug\net5.0\FBOL.Mobile.Entityframework.runtimeconfig.json
+C:\DevOps\FBOL_APIv2\FBOL.Mobile.Entityframework\bin\Debug\net5.0\FBOL.Mobile.Entityframework.runtimeconfig.dev.json
 C:\DevOps\FBOL_APIv2\FBOL.Mobile.Entityframework\bin\Debug\net5.0\FBOL.Mobile.Entityframework.dll
 C:\DevOps\FBOL_APIv2\FBOL.Mobile.Entityframework\bin\Debug\net5.0\ref\FBOL.Mobile.Entityframework.dll
 C:\DevOps\FBOL_APIv2\FBOL.Mobile.Entityframework\bin\Debug\net5.0\FBOL.Mobile.Entityframework.pdb
-C:\DevOps\FBOL_APIv2\FBOL.Mobile.Entityframework\obj\Debug\net5.0\FBOL.Mobile.Entityframework.csproj.AssemblyReference.cache
 C:\DevOps\FBOL_APIv2\FBOL.Mobile.Entityframework\obj\Debug\net5.0\FBOL.Mobile.Entityframework.GeneratedMSBuildEditorConfig.editorconfig
 C:\DevOps\FBOL_APIv2\FBOL.Mobile.Entityframework\obj\Debug\net5.0\FBOL.Mobile.Entityframework.AssemblyInfoInputs.cache
 C:\DevOps\FBOL_APIv2\FBOL.Mobile.Entityframework\obj\Debug\net5.0\FBOL.Mobile.Entityframework.AssemblyInfo.cs
@@ -10,6 +11,4 @@ C:\DevOps\FBOL_APIv2\FBOL.Mobile.Entityframework\obj\Debug\net5.0\FBOL.Mobile.En
 C:\DevOps\FBOL_APIv2\FBOL.Mobile.Entityframework\obj\Debug\net5.0\FBOL.Mobile.Entityframework.dll
 C:\DevOps\FBOL_APIv2\FBOL.Mobile.Entityframework\obj\Debug\net5.0\ref\FBOL.Mobile.Entityframework.dll
 C:\DevOps\FBOL_APIv2\FBOL.Mobile.Entityframework\obj\Debug\net5.0\FBOL.Mobile.Entityframework.pdb
-C:\DevOps\FBOL_APIv2\FBOL.Mobile.Entityframework\bin\Debug\net5.0\FBOL.Mobile.Entityframework.runtimeconfig.json
-C:\DevOps\FBOL_APIv2\FBOL.Mobile.Entityframework\bin\Debug\net5.0\FBOL.Mobile.Entityframework.runtimeconfig.dev.json
 C:\DevOps\FBOL_APIv2\FBOL.Mobile.Entityframework\obj\Debug\net5.0\FBOL.Mobile.Entityframework.genruntimeconfig.cache

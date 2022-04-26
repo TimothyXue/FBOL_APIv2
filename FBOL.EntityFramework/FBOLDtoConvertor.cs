@@ -25,10 +25,72 @@ namespace FBOL.EntityFramework
                 GroupSeq =entity.GroupSeq,
                 LessonId =entity.LessonId,
                 LessonSeq=entity.LessonSeq,
+                lesson_group_name = entity.lesson_group_name
             };
 
             return dto;
         }
+        public static EntityFramework.DTO.Lesson ConvertToDto(Lesson entity)
+        {
+            if (entity == null)
+            {
+                return null;
+            }
 
+            EntityFramework.DTO.Lesson dto = new EntityFramework.DTO.Lesson()
+            {
+                CourseId = entity.CourseId,
+                LessonId = entity.LessonId,
+                LessonSeq = entity.LessonSeq,
+                LessonName=entity.LessonName,
+                LessonTitle= entity.LessonTitle,
+                LearningOutcomeTitle= entity.LearningOutcomeTitle,
+                FmiElementId=entity.FmiElementId,
+                AssignmentEmail=entity.AssignmentEmail,
+                LessonDuration=entity.LessonDuration,
+                DaysSincePrevLesson=entity.DaysSincePrevLesson,
+                Extras=entity.Extras,
+                FacBill1=entity.FacBill1,
+                FacBill2=entity.FacBill2,
+                LeadDiscussion=entity.LeadDiscussion,
+                CoursePart=entity.CoursePart,
+                TeamView2=  entity.TeamView2,
+                FirstLesson=    entity.FirstLesson,
+                LastLesson= entity.LastLesson
+                
+            };
+
+            return dto;
+        }
+        public static EntityFramework.DTO.Activity ConvertToDto(Activity entity)
+        {
+            if (entity == null)
+            {
+                return null;
+            }
+
+            EntityFramework.DTO.Activity dto = new EntityFramework.DTO.Activity()
+            {
+                ActivityId= entity.ActivityId,
+                ActivityTitle= entity.ActivityTitle,
+                ActivityDesc= entity.ActivityDesc,
+                XslTemplate= entity.XslTemplate,
+                PdfTemplate= entity.PdfTemplate,
+                ActivityText= entity.ActivityText,
+                Tool= entity.Tool,
+                Url= entity.Url,
+                AutoAssess= entity.AutoAssess,
+                Alternative= entity.Alternative,
+                MmAssessed= entity.MmAssessed,
+                ActivityPlatform= entity.ActivityPlatform,
+                ActivityXml= entity.ActivityXml,
+                ActivityXmlBackup= entity.ActivityXmlBackup,
+                AssessmentMethodId= entity.AssessmentMethodId,
+                MmActivity= entity.MmActivity,
+                HiddenFromParticipant= entity.HiddenFromParticipant
+            };
+
+            return dto;
+        }
     }
 }

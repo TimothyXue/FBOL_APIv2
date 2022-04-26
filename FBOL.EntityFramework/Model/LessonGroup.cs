@@ -13,5 +13,6 @@ namespace FBOL.EntityFramework.Model
         public int GroupSeq { get; set; }
         public int LessonId { get; set; }
         public int LessonSeq { get; set; }
+        public string lesson_group_name { get; set; }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.Extensions.Configuration;
 
 #nullable disable
 
@@ -8,13 +9,17 @@ namespace FBOL.Mobile.Entityframework.Model
 {
     public partial class FBOLMobileContext : DbContext
     {
-        public FBOLMobileContext()
+        private readonly IConfiguration _config;
+ 
+        public FBOLMobileContext(IConfiguration configuration)
         {
+            _config = configuration;
         }
 
-        public FBOLMobileContext(DbContextOptions<FBOLMobileContext> options)
+        public FBOLMobileContext(DbContextOptions<FBOLMobileContext> options, IConfiguration configuration)
             : base(options)
         {
+            _config = configuration;
         }
 
         public virtual DbSet<AudioFile> AudioFiles { get; set; }
@@ -25,11 +30,10 @@ namespace FBOL.Mobile.Entityframework.Model
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Data Source=10.172.26.15;Initial Catalog=LMA_FBOLMobile;Integrated Security=True");
+                 optionsBuilder.UseSqlServer(_config.GetConnectionString("FBOLMobileConnection"));
             }
         }
-
+       
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");

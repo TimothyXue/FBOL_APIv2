@@ -32,6 +32,7 @@ namespace FBOL_API_v2
 
             services.AddControllers();
             services.AddDistributedMemoryCache();
+            services.AddSingleton<IConfiguration>(Configuration);
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options => {
                     options.TokenValidationParameters = new TokenValidationParameters
@@ -42,9 +43,23 @@ namespace FBOL_API_v2
                         ValidateIssuerSigningKey = true,
                         ValidIssuer = Configuration["Jwt:Issuer"],
                         ValidAudience = Configuration["Jwt:Audience"],
+                        ClockSkew = TimeSpan.Zero,
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
                     };
+                    options.Events = new JwtBearerEvents
+                    {
+                        OnAuthenticationFailed = context =>
+                        {
+                            if (context.Exception.GetType() == typeof(SecurityTokenExpiredException))
+                            {
+                                context.Response.Headers.Add("Token-Expired", "true");
+                            }
+                            return Task.CompletedTask;
+                        }
+                    };
                 });
+
+
             services.AddMvc();
 
             services.AddSwaggerGen(c =>
@@ -67,6 +82,7 @@ namespace FBOL_API_v2
 
             app.UseRouting();
             app.UseAuthentication();
+           
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
