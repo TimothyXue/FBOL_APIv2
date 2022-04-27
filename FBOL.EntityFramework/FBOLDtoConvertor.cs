@@ -92,5 +92,37 @@ namespace FBOL.EntityFramework
 
             return dto;
         }
+
+
+        public static EntityFramework.DTO.ActivityDetail ConvertToDto(ActivityDetail entity)
+        {
+            if (entity == null)
+            {
+                return null;
+            }
+
+            EntityFramework.DTO.ActivityDetail dto = new EntityFramework.DTO.ActivityDetail()
+            {
+               ActivityDetailId= entity.ActivityDetailId,
+               ActivityId = entity.ActivityId,
+               ParticipantId = entity.ParticipantId,
+               ActivityDate = entity.ActivityDate,
+               XmlTemplate = entity.XmlTemplate,
+               Paper= entity.Paper,
+               Completed= entity.Completed,
+               Assessed= entity.Assessed,
+               Status = entity.Status,
+               WorkareaUrl= entity.WorkareaUrl,
+               SubmitToMm= entity.SubmitToMm,
+               XmlActivityData= entity.XmlActivityData,
+               XmlActivityDataBackup= entity.XmlActivityDataBackup,
+               ReviewerParticipantId= entity.ReviewerParticipantId
+            };
+
+            return dto;
+        }
+
+
+
     }
 }

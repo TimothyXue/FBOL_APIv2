@@ -12,3 +12,4 @@ C:\DevOps\FBOL_APIv2\FBOL.EntityFramework\obj\Debug\net5.0\FBOL.EntityFramework.
 C:\DevOps\FBOL_APIv2\FBOL.EntityFramework\obj\Debug\net5.0\ref\FBOL.EntityFramework.dll
 C:\DevOps\FBOL_APIv2\FBOL.EntityFramework\obj\Debug\net5.0\FBOL.EntityFramework.pdb
 C:\DevOps\FBOL_APIv2\FBOL.EntityFramework\obj\Debug\net5.0\FBOL.EntityFramework.genruntimeconfig.cache
+C:\DevOps\FBOL_APIv2\FBOL.EntityFramework\obj\Debug\net5.0\FBOL.EntityFramework.csproj.AssemblyReference.cache

@@ -74,27 +74,33 @@ namespace FBOL_API_v2.Controllers
                 return NotFound("Lesson not found");
             }
         }
-
+        /* FOR TESTING THIS FUNCTION:
+                SELECT ad.xml_activity_data, al.lesson_id FROM activity_detail ad join participant p on ad.participant_id = p.participant_id
+        JOIN activity_lesson al on al.activity_id = ad.activity_id
+        where ad.xml_activity_data is not null and p.user_id = 267
+        */
         [HttpPost]
-        public IActionResult GetActivities(LessonRequest request)
+        public IActionResult GetParticipantActivities(LessonRequest request)
         {
             FBOLDb FBOLDb = new FBOLDb(_config);
             try
             {
-                var acs = FBOLDb.GetActivitiesByActivityID(request.LessonId);
-                if (acs == null)
+              
+               List<FBOL.EntityFramework.DTO.ActivityResponse> acd 
+                    = FBOLDb.GetActivityDetailsForActivittyListByParticipantID(FBOLDb.GetActivitiesByActivityID(request.LessonId), FBOLDb.GetParticipantIDs(GetCurrentUser().UserId));
+                if (acd == null || !acd.Any())
                 {
-                    return NotFound("Lessons not found");
+                    return NotFound("Activities not found");
                 }
                 else
                 {
-                    return Ok(acs);
+                    return Ok(acd);
                 }
             }
             catch (Exception)
             {
 
-                return NotFound("Lessons not found");
+                return NotFound("Activities not found");
             }
         }
 
@@ -123,7 +129,7 @@ namespace FBOL_API_v2.Controllers
         }
 
 
-        private User GetCurrentUserName()
+        private User GetCurrentUser()
         {
             var identity = HttpContext.User.Identity as ClaimsIdentity;
 
@@ -133,7 +139,7 @@ namespace FBOL_API_v2.Controllers
 
                 return new User
                 {
-                    UserName = userClaims.FirstOrDefault(o => o.Type == ClaimTypes.NameIdentifier)?.Value,
+                    UserId = int.TryParse(userClaims.FirstOrDefault(o => o.Type == ClaimTypes.NameIdentifier)?.Value, out var id) ? id : 0
                 };
             }
             return null;

@@ -54,7 +54,50 @@ namespace FBOL.EntityFramework
             }
         }
 
-       
+
+        public List<ActivityResponse> GetActivityDetailsForActivittyListByParticipantID(IEnumerable<DTO.Activity> activities, IEnumerable< int> participantIds)
+        {
+           
+            using (FBOLContext ctx = new FBOLContext(_config))
+            {
+                List<ActivityResponse> responses = new List<ActivityResponse>();
+                int ii = participantIds.Count();
+                try
+                {
+                    foreach (var item in activities)
+                    {
+                        Model.ActivityDetail acd = null;
+                        foreach (var id in participantIds)
+                        {
+                            if (ctx.ActivityDetails.Where(x => (x.ActivityId == item.ActivityId && x.ParticipantId == id)).FirstOrDefault() != null)
+                            {
+                                acd = ctx.ActivityDetails.Where(x => (x.ActivityId == item.ActivityId && x.ParticipantId == id)).FirstOrDefault();
+                            }
+                        }
+
+                        responses.Add(new ActivityResponse
+                        {
+                            ActivityId = item.ActivityId,
+                            ActivityTitle = item.ActivityTitle,
+                            ActivityDesc = item.ActivityDesc,
+                            XslTemplate = item.XslTemplate,
+                            ActivityXml = item.ActivityXml,
+                            AnwserXml = acd.XmlActivityData
+                        });
+                    }
+
+                    return responses;
+                }
+                catch (Exception)
+                {
+                    return responses;
+                }
+                
+
+            }
+        }
+
+
         public  List<DTO.Activity> GetActivitiesByActivityID(int lessonId)
         {
 
@@ -112,6 +155,23 @@ namespace FBOL.EntityFramework
                 }
 
                 return dtoLList.OrderBy(m=>m.LessonSeq).ToList();
+            }
+        }
+
+        public List<int> GetParticipantIDs(int UserID)
+        {
+            using (FBOLContext ctx = new FBOLContext(_config))
+            {
+                List<int> participantIDs = new List<int>();
+                List<Model.Participant> participants = ctx.Participants.Where(x => (x.UserId == UserID)).ToList();
+                foreach (var item in participants)
+                {
+                    participantIDs.Add(item.ParticipantId);
+                }
+
+
+                return participantIDs;
+
             }
         }
     }
