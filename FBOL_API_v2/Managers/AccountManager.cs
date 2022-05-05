@@ -31,7 +31,6 @@ namespace FBOL_API_v2.Managers
 
                 return passwordHash.Length == storedPasswordHash.Length && passwordHash.SequenceEqual(storedPasswordHash);
             }
-
             return false;
 
         }

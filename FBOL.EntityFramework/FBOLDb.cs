@@ -96,9 +96,18 @@ namespace FBOL.EntityFramework
 
             }
         }
+       
 
+        public DTO.Activity GetActivitiesByActivityID(int activityId)
+        {
+            using (FBOLContext ctx = new FBOLContext(_config))
+            {
+               
+                return FBOLDtoConvertor.ConvertToDto(ctx.Activities.Where(m=>m.ActivityId == activityId).FirstOrDefault());
+            }
+        }
 
-        public  List<DTO.Activity> GetActivitiesByActivityID(int lessonId)
+        public  List<DTO.Activity> GetActivitiesByLessonID(int lessonId)
         {
 
             using (FBOLContext ctx = new FBOLContext(_config))

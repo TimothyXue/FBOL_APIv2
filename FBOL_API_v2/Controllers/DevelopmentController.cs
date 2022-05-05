@@ -87,7 +87,7 @@ namespace FBOL_API_v2.Controllers
             {
               
                List<FBOL.EntityFramework.DTO.ActivityResponse> acd 
-                    = FBOLDb.GetActivityDetailsForActivittyListByParticipantID(FBOLDb.GetActivitiesByActivityID(request.LessonId), FBOLDb.GetParticipantIDs(GetCurrentUser().UserId));
+                    = FBOLDb.GetActivityDetailsForActivittyListByParticipantID(FBOLDb.GetActivitiesByLessonID(request.LessonId), FBOLDb.GetParticipantIDs(GetCurrentUser().UserId));
                 if (acd == null || !acd.Any())
                 {
                     return NotFound("Activities not found");
@@ -125,6 +125,24 @@ namespace FBOL_API_v2.Controllers
             {
 
                 return NotFound("Lessons not found");
+            }
+        }
+
+        [HttpGet]
+        public IActionResult GetTestActivities()
+        {
+            FBOLDb FBOLDb = new FBOLDb(_config);
+            try
+            {
+
+               
+                    return Ok(FBOLDb.GetActivityByActivityID(927));
+                
+            }
+            catch (Exception)
+            {
+
+                return NotFound("Activities not found");
             }
         }
 
