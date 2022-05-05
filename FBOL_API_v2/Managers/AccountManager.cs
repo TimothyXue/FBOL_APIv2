@@ -56,6 +56,5 @@ namespace FBOL_API_v2.Managers
 
             return sha256.ComputeHash(passwordSalted);
         }
-
     }
 }

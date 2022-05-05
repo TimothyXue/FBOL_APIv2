@@ -43,22 +43,27 @@ namespace FBOL_API_v2.Controllers
         private User Authenticate(UserLogin userLogin)
         {
             AccountManager _am = new AccountManager(_config);
-
-            if (_am.ValidateUser(userLogin.UserName.Trim(), userLogin.Password))
+            try
             {
-                FBOL.Mobile.Entityframework.DTO.User user = _am.GetUser(userLogin.UserName.Trim());
-
-                if (user.IsActive && user.IsConfirmed)
+                if (_am.ValidateUser(userLogin.UserName.Trim(), userLogin.Password))
                 {
-                    return user;
+                    FBOL.Mobile.Entityframework.DTO.User user = _am.GetUser(userLogin.UserName.Trim());
 
+                    if (user.IsActive && user.IsConfirmed)
+                    {
+                        return user;
+                    }
+                    else
+                    {
+                        return null;
+                    }
                 }
                 else
                 {
                     return null;
                 }
             }
-            else
+            catch (Exception)
             {
                 return null;
             }
