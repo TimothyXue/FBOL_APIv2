@@ -3,10 +3,12 @@ using FBOL.Mobile.Entityframework.DTO;
 using FBOL_API_v2.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Security.Claims;
 
@@ -19,7 +21,7 @@ namespace FBOL_API_v2.Controllers
     {
         private readonly ILogger<DevelopmentController> _logger;
         private readonly IConfiguration _config;
-     
+
         public DevelopmentController(ILogger<DevelopmentController> logger, IConfiguration config)
         {
             _logger = logger;
@@ -31,11 +33,10 @@ namespace FBOL_API_v2.Controllers
         {
             FBOLDb FBOLDb = new FBOLDb(_config);
 
-
             try
             {
                 var lsg = FBOLDb.GetLessonGroupByLessonGroupID(request.LessonGroupId);
-                if (lsg == null) 
+                if (lsg == null)
                 {
                     return NotFound("Lesson group not found");
                 }
@@ -85,9 +86,9 @@ namespace FBOL_API_v2.Controllers
             FBOLDb FBOLDb = new FBOLDb(_config);
             try
             {
-              
-               List<FBOL.EntityFramework.DTO.ActivityResponse> acd 
-                    = FBOLDb.GetActivityDetailsForActivittyListByParticipantID(FBOLDb.GetActivitiesByLessonID(request.LessonId), FBOLDb.GetParticipantIDs(GetCurrentUser().UserId));
+
+                List<FBOL.EntityFramework.DTO.ActivityResponse> acd
+                     = FBOLDb.GetActivityDetailsForActivittyListByParticipantID(FBOLDb.GetActivitiesByLessonID(request.LessonId), FBOLDb.GetParticipantIDs(GetCurrentUser().UserId));
                 if (acd == null || !acd.Any())
                 {
                     return NotFound("Activities not found");
@@ -128,23 +129,68 @@ namespace FBOL_API_v2.Controllers
             }
         }
 
+
+
         [HttpGet]
-        public IActionResult GetTestActivities()
+        public IActionResult GetTestActivity(ActivityRequest request)
         {
             FBOLDb FBOLDb = new FBOLDb(_config);
             try
             {
-
-               
-                    return Ok(FBOLDb.GetActivityByActivityID(927));
-                
+                return Ok(FBOLDb.GetActivityByActivityID(927));
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                return NotFound("Activities not found");
+                return NotFound(ex.Message);
             }
         }
+
+
+
+        [HttpPost]
+        public IActionResult GetFilledTestActivity(ActivityRequest request)
+        {
+            try
+            {
+                return Ok(SpCall(request.participantId, request.activityId));
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
+        }
+
+
+        private string SpCall(int participantId, int activityId)
+        {
+            using (SqlConnection connection = new SqlConnection(_config.GetConnectionString("FBOLConnection")))
+            {
+
+                connection.Open(); SqlCommand command = new SqlCommand("p_GetFilledActivity", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.Add(new SqlParameter("@participantId", participantId));
+                command.Parameters.Add(new SqlParameter("@activityId", activityId));
+                SqlDataReader reader = command.ExecuteReader();
+                string tempStore = "";
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        tempStore = reader.GetString(0);
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("No rows found");
+                }
+                reader.Close();
+
+               return tempStore;
+            }
+
+        }
+
 
 
         private User GetCurrentUser()
@@ -165,5 +211,5 @@ namespace FBOL_API_v2.Controllers
     }
 }
 
-   
+
 
