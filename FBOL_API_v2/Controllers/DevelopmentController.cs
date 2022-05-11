@@ -130,14 +130,14 @@ namespace FBOL_API_v2.Controllers
         }
 
 
-
         [HttpGet]
-        public IActionResult GetTestActivity(ActivityRequest request)
+        public IActionResult GetTestActivity()
         {
             FBOLDb FBOLDb = new FBOLDb(_config);
             try
             {
-                return Ok(FBOLDb.GetActivityByActivityID(927));
+                var activity = FBOLDb.GetActivityByActivityID(980);
+                return Ok(new ActivityResponse { ActivityId = activity .ActivityId, ActivityTitle= activity.ActivityTitle, ActivityXml = FBOLUtil.RemoveRootTag(SpCall(68372, activity.ActivityId)) , version = activity.ActivityPlatform });
             }
             catch (Exception ex)
             {
@@ -146,13 +146,12 @@ namespace FBOL_API_v2.Controllers
         }
 
 
-
         [HttpPost]
         public IActionResult GetFilledTestActivity(ActivityRequest request)
         {
             try
             {
-                return Ok(SpCall(request.participantId, request.activityId));
+                return Ok(FBOLUtil.RemoveRootTag(SpCall(request.participantId, request.activityId)));
             }
             catch (Exception ex)
             {
@@ -190,7 +189,6 @@ namespace FBOL_API_v2.Controllers
             }
 
         }
-
 
 
         private User GetCurrentUser()

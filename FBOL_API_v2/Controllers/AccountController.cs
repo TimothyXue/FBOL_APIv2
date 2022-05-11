@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
+using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
@@ -14,7 +15,7 @@ using System.Text;
 
 namespace FBOL_API_v2.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class AccountController : Controller
     {
@@ -96,6 +97,19 @@ namespace FBOL_API_v2.Controllers
 
             return Ok($"Hi {currentUser.UserId}, you are logged in");
         }
+
+
+        [HttpGet]
+        public IActionResult test()
+        {
+            var currentUser = GetCurrentUser();
+            var dic = new Dictionary<string, object>();
+            dic.Add("activity", new ActivityResponse { ActivityTitle = "dfsdfg" });
+            dic.Add("participant", new ActivityRequest { activityId = 2131231 });
+            return Ok(dic);
+        }
+
+
 
         private User GetCurrentUser()
         {

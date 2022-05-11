@@ -42,7 +42,7 @@ namespace FBOL.EntityFramework
             }
         }
 
-        public  object GetActivityByActivityID(int activityId)
+        public DTO.Activity GetActivityByActivityID(int activityId)
         {
             using (FBOLContext ctx = new FBOLContext(_config))
             {
